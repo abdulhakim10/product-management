@@ -24,12 +24,24 @@ const createProduct = async (req: Request, res: Response) => {
 };
 
 // retrieve a list of all products data
+
 const getProductsList = async (req: Request, res: Response) => {
   try {
-    const result = await productService.getProductsListFromDB();
+    const searchTerm = req.query.searchTerm as string | undefined;
+
+    let result;
+    if (!searchTerm) {
+      // If no search term, fetch all products or handle as required
+      result = await productService.getProductsListFromDB();
+    } else {
+      result = await productService.getSearchResultByQuery(searchTerm);
+    }
+
     res.status(200).json({
       success: true,
-      message: 'Products fetched successfully!',
+      message: searchTerm
+        ? `Products matching search term '${searchTerm}' fetched successfully!`
+        : 'Products fetched successfully!',
       data: result,
     });
   } catch (err) {
@@ -71,7 +83,7 @@ const updateProductInfo = async (req: Request, res: Response) => {
       zodParseData,
       productId,
     );
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: 'Product updated successfully!',
       data: result,
@@ -90,7 +102,7 @@ const deleteProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
 
-    const result = await productService.deleteProductFromDB(productId);
+    await productService.deleteProductFromDB(productId);
     res.status(201).json({
       success: true,
       message: 'Product deleted successfully!',

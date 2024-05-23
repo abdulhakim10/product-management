@@ -53,4 +53,7 @@ const productSchema = new Schema<Product>({
   },
 });
 
+// Create a text index on the name and description fields
+productSchema.index({ name: 'text', description: 'text', tags: 'text' });
+
 export const ProductModel = model<Product>('Product', productSchema);

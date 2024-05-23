@@ -13,6 +13,12 @@ const getProductsListFromDB = async () => {
   return result;
 };
 
+// retrieve searching results
+const getSearchResultByQuery = async (searchTerm: string) => {
+  const result = await ProductModel.find({ $text: { $search: searchTerm } });
+  return result;
+};
+
 // retrieve a specific product by ID
 const getSingleProductByIDFromDB = async (productId: string) => {
   const result = await ProductModel.findById(productId);
@@ -40,4 +46,5 @@ export const productService = {
   getSingleProductByIDFromDB,
   updateProductIntoDB,
   deleteProductFromDB,
+  getSearchResultByQuery,
 };
