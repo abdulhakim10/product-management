@@ -60,8 +60,55 @@ const getSingleProductByID = async (req: Request, res: Response) => {
   }
 };
 
+// update product information
+const updateProductInfo = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const productData = req.body;
+    // zod validation
+    const zodParseData = productValidationSchema.parse(productData);
+    const result = await productService.updateProductIntoDB(
+      zodParseData,
+      productId,
+    );
+    res.status(201).json({
+      success: true,
+      message: 'Product updated successfully!',
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong',
+      error: err,
+    });
+  }
+};
+
+// update product information
+const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+
+    const result = await productService.deleteProductFromDB(productId);
+    res.status(201).json({
+      success: true,
+      message: 'Product deleted successfully!',
+      data: null,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong',
+      error: err,
+    });
+  }
+};
+
 export const productController = {
   createProduct,
   getProductsList,
   getSingleProductByID,
+  updateProductInfo,
+  deleteProduct,
 };

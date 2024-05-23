@@ -8,6 +8,10 @@ rouer
   .post(productController.createProduct)
   .get(productController.getProductsList);
 
-rouer.route('/:productId').get(productController.getSingleProductByID);
+rouer
+  .route('/:productId')
+  .get(productController.getSingleProductByID)
+  .put(productController.updateProductInfo)
+  .delete(productController.deleteProduct);
 
 export const productRoutes = rouer;
