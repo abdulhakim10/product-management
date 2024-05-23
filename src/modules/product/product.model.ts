@@ -17,10 +17,9 @@ const inventorySchema = new Schema<Inventory>({
     type: Number,
     required: true,
   },
-  isStock: {
+  inStock: {
     type: Boolean,
     required: true,
-    default: true,
   },
 });
 
@@ -51,7 +50,6 @@ const productSchema = new Schema<Product>({
   },
   inventory: {
     type: inventorySchema,
-    required: true,
   },
 });
 

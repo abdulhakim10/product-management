@@ -7,9 +7,9 @@ async function main() {
     await mongoose.connect(config.database_url as string);
     console.log('Database connected successfully');
 
-    app.listen(config.prot, () => {
+    app.listen(config.port, () => {
       console.log(
-        `Product Management server running on the port: ${config.prot}`,
+        `Product Management server running on the port: ${config.port}`,
       );
     });
   } catch (err) {

@@ -5,7 +5,7 @@ export type Varient = {
 
 export type Inventory = {
   quantity: number;
-  isStock: boolean;
+  inStock: boolean;
 };
 
 export type Product = {
