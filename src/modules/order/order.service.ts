@@ -2,6 +2,7 @@ import { ProductModel } from '../product/product.model';
 import { Order } from './order.interface';
 import { OrderModel } from './order.model';
 
+// create order
 const createOrderIntoDB = async (orderData: Order) => {
   try {
     // find the product by id
@@ -46,12 +47,25 @@ const createOrderIntoDB = async (orderData: Order) => {
       },
     );
 
-    return order;
+    return {
+      success: true,
+      message: 'Order created successfully',
+      data: order,
+    };
   } catch (err) {
     console.error(err);
   }
 };
 
+// retrieve all orders
+const getAllOrdrsFromDB = async (email: string) => {
+  let query;
+  !email ? (query = {}) : (query = { email });
+  const orders = await OrderModel.find(query);
+  return orders;
+};
+
 export const orderService = {
   createOrderIntoDB,
+  getAllOrdrsFromDB,
 };
