@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { Order } from './order.interface';
 
-const orderSchema = new Schema<Order>({
+export const orderSchema = new Schema<Order>({
   email: {
     type: String,
     required: true,
@@ -20,4 +20,4 @@ const orderSchema = new Schema<Order>({
   },
 });
 
-export const OrderModel = model<Order>('Oreder', orderSchema);
+export const OrderModel = model<Order>('Order', orderSchema);

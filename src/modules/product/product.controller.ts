@@ -29,13 +29,7 @@ const getProductsList = async (req: Request, res: Response) => {
   try {
     const searchTerm = req.query.searchTerm as string | undefined;
 
-    let result;
-    if (!searchTerm) {
-      // If no search term, fetch all products or handle as required
-      result = await productService.getProductsListFromDB();
-    } else {
-      result = await productService.getSearchResultByQuery(searchTerm);
-    }
+    const result = await productService.getProductsListFromDB(searchTerm);
 
     res.status(200).json({
       success: true,
