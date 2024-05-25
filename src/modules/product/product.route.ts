@@ -1,17 +1,16 @@
 import express from 'express';
 import { productController } from './product.controller';
-const rouer = express.Router();
+const router = express.Router();
 
-// rouer.post('/', productController.createProduct);
-rouer
+router
   .route('/')
   .post(productController.createProduct)
   .get(productController.getProductsList);
 
-rouer
+router
   .route('/:productId')
   .get(productController.getSingleProductByID)
   .put(productController.updateProductInfo)
   .delete(productController.deleteProduct);
 
-export const productRoutes = rouer;
+export const productRoutes = router;

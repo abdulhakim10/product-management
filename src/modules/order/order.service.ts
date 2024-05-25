@@ -58,7 +58,7 @@ const createOrderIntoDB = async (orderData: Order) => {
 };
 
 // retrieve all orders
-const getAllOrdrsFromDB = async (email: string) => {
+const getAllOrdersFromDB = async (email: string) => {
   let query;
   !email ? (query = {}) : (query = { email });
   const orders = await OrderModel.find(query);
@@ -67,5 +67,5 @@ const getAllOrdrsFromDB = async (email: string) => {
 
 export const orderService = {
   createOrderIntoDB,
-  getAllOrdrsFromDB,
+  getAllOrdersFromDB,
 };
